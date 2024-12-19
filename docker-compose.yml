@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:17.0
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app
+    
+  backend:
+    build: ./backend
+    depends_on:
+      - postgres
+    ports:
+      - '3000:3000'
+    environment:
+      PORT: ${PORT}
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_PORT: ${DB_PORT}
+      HMAC_SECRET: ${HMAC_SECRET}
+      JWT_SECRET: ${JWT_SECRET}
+    networks:
+      - app
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - '8080:80'
+    environment:
+      VITE_API_URL: ${VITE_API_URL}
+      VITE_SECRET_KEY_HMAC: ${VITE_SECRET_KEY_HMAC}
+    networks:
+      - app
+
+networks:
+  app:
+    name: app
+    driver: bridge
