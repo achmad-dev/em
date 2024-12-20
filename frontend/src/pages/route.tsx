@@ -4,7 +4,7 @@
 */
 import SignInPage from "./signin/signin";
 import { Routes, Route, useNavigate } from "react-router";
-import Dashboard from "./dashboard/dashboard";
+import DashboardLayout from "./dashboard/dashboard";
 import useStore from "@/store/useStore";
 import { useEffect } from "react";
 
@@ -26,7 +26,7 @@ const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/signin" element={<SignInPage />} />
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<DashboardLayout />} />
             <Route path="*" element={<h1>404</h1>} />
         </Routes>
     );

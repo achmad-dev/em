@@ -9,7 +9,7 @@ import { useEvent } from '@/hooks/useEvent';
 
 
 
-const HrDashboard = (prop: {role: string}) => {
+const Dashboard = (prop: {role: string}) => {
     const { events } = useEvent();
 
     return (
@@ -31,4 +31,4 @@ const HrDashboard = (prop: {role: string}) => {
       )
 };
 
-export default HrDashboard;
+export default Dashboard;

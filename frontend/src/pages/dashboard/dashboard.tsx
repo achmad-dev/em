@@ -3,15 +3,15 @@
 --- See LICENSE for more details
 */
 
-import HrDashboard from "@/components/template/dashboard";
+import Dashboard from "@/components/template/dashboard";
 import useStore from "@/store/useStore";
 import { Toaster } from "@/components/ui/toaster";
 
-export default function Dashboard() {
+export default function DashboardLayout() {
     const { role } = useStore();
     return (
         <>
-            <HrDashboard role={role ? role : ""}/>
+            <Dashboard role={role ? role : ""}/>
             <Toaster />
         </>
     );
